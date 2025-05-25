@@ -27,9 +27,47 @@ To implement HASH ALGORITHM
 
 
 ## Program:
-
+~~~
+#include <stdio.h>
+ #include <string.h>
+ void computeSimpleHash(const char *message, unsigned char *hash)
+ {
+ unsigned char temp = 0;
+for (int i = 0; message[i] != '\0'; i++)
+ {
+ temp = temp ^ message[i];
+ temp += message[i];
+ }
+ *hash = temp;
+ }
+ int main()
+ {
+ char message[256];
+ unsigned char hash;
+ char receivedHash[3];
+ printf("Enter the message: ");
+ scanf("%s", message);
+ computeSimpleHash(message, &hash);
+ printf("Computed Hash (in hex): %02x\n", hash);
+ printf("Enter the received hash (in hex): ");
+ scanf("%s", receivedHash);
+ unsigned int receivedHashValue;
+ sscanf(receivedHash, "%02x", &receivedHashValue);
+ if (hash == receivedHashValue)
+ {
+ printf("Hash verification successful. Message is unchanged.\n");
+ }
+ else
+ {
+ printf("Hash verification failed. Message has been altered.\n");
+ }
+ return 0;
+ }
+~~~
 
 ## Output:
+![WhatsApp Image 2025-05-25 at 16 57 57_5a106baf](https://github.com/user-attachments/assets/947e1ac8-50c4-4c1b-974b-5d752d8ff286)
+
 
 ## Result:
 The program is executed successfully.
